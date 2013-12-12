@@ -184,13 +184,13 @@ public class MysqlState<T> implements IBackingMap<T> {
 	private List<String> getValueColumns() {
 		final List<String> cols = Lists.newArrayList(config.getValueColumns()); // the columns storing the values
 		if (StateType.OPAQUE.equals(config.getType()) || StateType.TRANSACTIONAL.equals(config.getType())) {
-			cols.add("txid");
+			cols.add(config.getTxidColumn());
 		}
 		if (StateType.OPAQUE.equals(config.getType())) {
 			cols.addAll(Lists.transform(Arrays.asList(config.getValueColumns()), new Function<String, String>() {
 				@Override
 				public String apply(final String field) {
-					return "prev_" + field;
+					return config.getPrevPrefix() + field;
 				}
 			})); // the prev_* columns
 		}

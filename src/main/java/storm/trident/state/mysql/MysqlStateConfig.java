@@ -12,6 +12,8 @@ public class MysqlStateConfig implements Serializable {
 	private StateType type = StateType.OPAQUE;
 	private String[] keyColumns;
 	private String[] valueColumns;
+	private String txidColumn = "txid";
+	private String prevPrefix = "prev_";
 	private int batchSize = DEFAULT_BATCH_SIZE;
 	private int cacheSize = DEFAULT_CACHE_SIZE;
 
@@ -48,6 +50,22 @@ public class MysqlStateConfig implements Serializable {
 
 	public void setKeyColumns(String[] keyColumns) {
 		this.keyColumns = keyColumns;
+	}
+
+	public String getTxidColumn() {
+		return txidColumn;
+	}
+
+	public void setTxidColumn(String txidColumn) {
+		this.txidColumn = txidColumn;
+	}
+
+	public String getPrevPrefix() {
+		return prevPrefix;
+	}
+
+	public void setPrevPrefix(String prevPrefix) {
+		this.prevPrefix = prevPrefix;
 	}
 
 	public int getCacheSize() {
